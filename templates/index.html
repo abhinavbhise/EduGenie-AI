@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EduGenie AI</title>
+<link rel="stylesheet" href="/static/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+<div class="page-shell">
+    <nav class="topbar">
+        <div class="brand">
+            <div class="brand-mark">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <div>
+                <h2>EduGenie AI</h2>
+                <p>Study smarter with structured AI help</p>
+            </div>
+        </div>
+
+        <button id="getStartedBtn" class="ghost-btn">
+            <i class="fa-solid fa-bolt"></i>
+            Get Started
+        </button>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-copy">
+            <p class="eyebrow">Learning workspace</p>
+            <h1>Your AI study partner for explanations, notes, quizzes, flashcards, and reminders.</h1>
+            <p class="hero-text">
+                Pick a tool, write a topic, question, or reminder, and get a clean answer area built for focused study.
+            </p>
+        </div>
+        <div class="hero-card">
+            <div class="hero-stat">
+                <span>6</span>
+                <p>study modes</p>
+            </div>
+            <div class="hero-stat">
+                <span>1</span>
+                <p>question canvas</p>
+            </div>
+            <div class="hero-stat">
+                <span>&infin;</span>
+                <p>lesson depth</p>
+            </div>
+        </div>
+    </header>
+
+    <main id="workspace" class="workspace app-mode-study">
+        <aside class="panel tools-panel">
+            <div class="panel-head">
+                <div>
+                    <p class="panel-label">Tools</p>
+                    <h3>Choose a mode</h3>
+                </div>
+                <span class="panel-badge">Active</span>
+            </div>
+
+            <div class="tool-grid">
+                <button class="tool-tile active" data-mode="study" data-feature="Explain" data-placeholder="Enter a topic you want explained...">
+                    <i class="fa-solid fa-lightbulb"></i>
+                    <span>Explain</span>
+                    <small>Simple breakdowns</small>
+                </button>
+
+                <button class="tool-tile" data-mode="study" data-feature="Notes" data-placeholder="Enter a chapter or subject for notes...">
+                    <i class="fa-solid fa-note-sticky"></i>
+                    <span>Notes</span>
+                    <small>Clean study notes</small>
+                </button>
+
+                <button class="tool-tile" data-mode="study" data-feature="Quiz" data-placeholder="Enter a topic for practice questions...">
+                    <i class="fa-solid fa-list-check"></i>
+                    <span>Quiz</span>
+                    <small>Practice questions</small>
+                </button>
+
+                <button class="tool-tile" data-mode="study" data-feature="Flashcards" data-placeholder="Enter a topic for flashcards...">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <span>Flashcards</span>
+                    <small>Quick recall cards</small>
+                </button>
+
+                <button class="tool-tile" data-mode="study" data-feature="Questions" data-placeholder="Ask any academic question...">
+                    <i class="fa-solid fa-comments"></i>
+                    <span>Questions</span>
+                    <small>Direct answers</small>
+                </button>
+
+                <button class="tool-tile" data-mode="reminder" data-feature="Remind me">
+                    <i class="fa-solid fa-bell"></i>
+                    <span>Remind me</span>
+                    <small>Send study reminders to Gmail</small>
+                </button>
+            </div>
+
+            <div class="tips-card" id="tipsCard">
+                <p class="panel-label">Prompt ideas</p>
+                <div class="tip-pills">
+                    <button class="tip-pill" data-tip="Explain photosynthesis in simple terms">Photosynthesis</button>
+                    <button class="tip-pill" data-tip="Create notes on the nervous system">Nervous system</button>
+                    <button class="tip-pill" data-tip="Make a quiz on world war 2">World War 2</button>
+                </div>
+            </div>
+        </aside>
+
+        <section class="panel answer-panel">
+            <div id="modeContent"></div>
+        </section>
+    </main>
+</div>
+<script src="/static/app.js"></script>
+</body>
+</html>
