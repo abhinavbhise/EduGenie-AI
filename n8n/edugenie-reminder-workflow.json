@@ -1,0 +1,80 @@
+{
+  "name": "EduGenie Reminder Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "edugenie-reminder",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "2c2f9b14-7c5c-4a98-8ee1-3c9dfe4c61a0",
+      "name": "EduGenie Reminder Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        260,
+        300
+      ],
+      "webhookId": "edugenie-reminder"
+    },
+    {
+      "parameters": {
+        "amount": "={{$json.body.delay_seconds}}",
+        "unit": "seconds"
+      },
+      "id": "f4f5d7c3-7e39-4d0d-8dd8-66c87d18e2d5",
+      "name": "Wait Until Reminder",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [
+        520,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "={{$env.EDUGENIE_FROM_EMAIL}}",
+        "toEmail": "={{$json.body.email}}",
+        "subject": "={{`EduGenie reminder: ${$json.body.reminder}`}}",
+        "emailFormat": "text",
+        "text": "={{`Reminder: ${$json.body.reminder}\nRequested time: ${$json.body.time}\nScheduled for: ${$json.body.scheduled_for}\nSource: ${$json.body.source}`}}"
+      },
+      "id": "5b5563da-11bc-4097-a197-2c65c50ff257",
+      "name": "Send Reminder Email",
+      "type": "n8n-nodes-base.sendEmail",
+      "typeVersion": 1,
+      "position": [
+        790,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "EduGenie Reminder Webhook": {
+      "main": [
+        [
+          {
+            "node": "Wait Until Reminder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait Until Reminder": {
+      "main": [
+        [
+          {
+            "node": "Send Reminder Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {},
+  "versionId": "1"
+}
