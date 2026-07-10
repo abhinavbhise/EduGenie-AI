@@ -55,13 +55,13 @@ def ai_node(state: State):
 builder = StateGraph(State)
 
 builder.add_node("normalize", normalize_node)
-builder.add_node("prompt", prompt_node)
+builder.add_node("build_prompt", prompt_node)
 builder.add_node("ai", ai_node)
 
 builder.set_entry_point("normalize")
 
-builder.add_edge("normalize", "prompt")
-builder.add_edge("prompt", "ai")
+builder.add_edge("normalize", "build_prompt")
+builder.add_edge("build_prompt", "ai")
 builder.add_edge("ai", END)
 
 graph = builder.compile()

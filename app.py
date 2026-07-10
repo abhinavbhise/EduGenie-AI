@@ -53,11 +53,13 @@ class ReminderRequest(BaseModel):
 
 
 def _generation_timeout(feature: str) -> int:
+    # Keep this timeout higher than the Gemini internal timeout to allow
+    # the model wrapper to return its fallback response cleanly.
     if feature == "Quiz":
-        return 25
+        return 35
     if feature == "Flashcards":
-        return 18
-    return 15
+        return 28
+    return 22
 
 
 @app.get("/", response_class=HTMLResponse)
@@ -79,11 +81,15 @@ async def generate(data: AIRequest):
             ),
             timeout=timeout_seconds,
         )
-    except asyncio.TimeoutError as exc:
-        raise HTTPException(
-            status_code=504,
-            detail="AI generation took too long. Please try again with a shorter prompt or simpler quiz.",
-        ) from exc
+    except asyncio.TimeoutError:
+        answer = (
+            "# Quick Study Help\n\n"
+            "The request is taking longer than expected right now.\n\n"
+            "## What to try\n"
+            "- Retry once in a few seconds\n"
+            "- Use a shorter prompt\n"
+            "- Pick Beginner difficulty for faster output\n"
+        )
 
     return {
         "response": answer
